@@ -52,9 +52,13 @@ WSI_object.createPatches_bag_hdf5(**patch_params, save_path=patch_save_dir, save
 print(f"Patch bag creation finished in {time.time() - start_time}")
 
 # Stitching
-## This path needs to reference the exact file.. (poor design)
+## This path needs to reference the exact file... Note that the actual filename is decided in createPatches_bag_hdf5 (IMO poor design)
 patch_file_path = os.path.join(patch_save_dir, slide_id + '.h5')
 start_time = time.time()
 heatmap = StitchPatches(patch_file_path, downscale=64, bg_color=(0,0,0), alpha=-1, draw_grid=False)
 heatmap.save(os.path.join(args.output_dir, slide_id + '_stitched.png'))
 print(f"Stitching finished in {time.time() - start_time}")
+
+# Rename the file containing the patches to ensure we can easily
+# distinguish incomplete bags of patches (.h5 files) from complete ones in case a job fails.
+os.rename(patch_file_path, os.path.join(patch_save_dir, slide_id + '_patches.h5'))
