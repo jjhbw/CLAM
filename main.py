@@ -171,7 +171,8 @@ elif args.task == 'tcga_kidney_cv':
                             label_dict = {'TCGA-KICH':0, 'TCGA-KIRC':1, 'TCGA-KIRP':2},
                             patient_strat= False,
                             ignore=['TCGA-SARC'])
-    if args.model_type == 'clam':
+
+    if 'clam' in args.model_type:
         assert args.subtyping
 
 else:
