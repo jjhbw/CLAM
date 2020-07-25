@@ -312,7 +312,7 @@ class Generic_MIL_Dataset(Generic_WSI_Classification_Dataset):
 		slide_id = self.slide_data['slide_id'][idx]
 		label = self.slide_data['label'][idx]
 
-		full_path = os.path.join(self.data_dir,'{}.h5'.format(slide_id))
+		full_path = os.path.join(self.data_dir,'{}_features.h5'.format(slide_id))
 		with h5py.File(full_path,'r') as hdf5_file:
 			features = hdf5_file['features'][:]
 			coords = hdf5_file['coords'][:]
