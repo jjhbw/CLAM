@@ -11,7 +11,7 @@ parser.add_argument('--seed', type=int, default=1,
                     help='random seed (default: 1)')
 parser.add_argument('--k', type=int, default=10,
                     help='number of splits (default: 10)')
-parser.add_argument('--task', type=str, choices=['camelyon_40x_cv', 'tcga_kidney_cv'])
+parser.add_argument('--task', type=str, choices=['camelyon_40x_cv', 'tcga_kidney_cv', 'smoke_test'])
 
 args = parser.parse_args()
 
@@ -42,7 +42,19 @@ elif args.task == 'camelyon_40x_cv':
     val_num = (31, 19)
     test_num = (31, 19)
 
+elif args.task == 'smoke_test':
+    args.n_classes=2
+    dataset = Generic_MIL_Dataset(csv_path = './smoke_test_labels.csv',
+                            shuffle = False,
+                            seed = args.seed, 
+                            print_info = True,
+                            label_dict = {'A':0, 'B':1},
+                            patient_strat= False,
+                            ignore=[])
 
+    # TODO: mock values. Determine more sensible proportions.
+    test_num = (5, 5)
+    val_num = (5, 5)
 
 else:
     raise NotImplementedError
