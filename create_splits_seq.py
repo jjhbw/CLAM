@@ -12,6 +12,7 @@ parser.add_argument('--seed', type=int, default=1,
 parser.add_argument('--k', type=int, default=10,
                     help='number of splits (default: 10)')
 parser.add_argument('--task', type=str, choices=['camelyon_40x_cv', 'tcga_kidney_cv', 'smoke_test'])
+parser.add_argument('--data_dir', type=str, default=None, help='data directory')
 
 args = parser.parse_args()
 
@@ -24,6 +25,7 @@ if args.task == 'tcga_kidney':
                             label_col = 'label',
                             patient_strat= True,
                             patient_voting='maj',
+                            data_dir=args.data_dir,
                             ignore=['TCGA-SARC'])
 
     val_num = (10, 48, 26)
@@ -37,6 +39,7 @@ elif args.task == 'camelyon_40x_cv':
                             print_info = True,
                             label_dict = {'normal_tissue':0, 'tumor_tissue':1},
                             patient_strat= True,
+                            data_dir=args.data_dir,
                             ignore=[])
 
     val_num = (31, 19)
@@ -50,6 +53,7 @@ elif args.task == 'smoke_test':
                             print_info = True,
                             label_dict = {'A':0, 'B':1},
                             patient_strat= False,
+                            data_dir=args.data_dir,
                             ignore=[])
 
     # TODO: mock values. Determine more sensible proportions.
