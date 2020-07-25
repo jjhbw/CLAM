@@ -204,10 +204,9 @@ if args.split_dir is None:
     args.split_dir = os.path.join('splits', args.task+'_{}'.format(int(args.label_frac*100)))
 else:
     args.split_dir = os.path.join('splits', args.split_dir)
-assert os.path.isdir(args.split_dir)
+    assert os.path.isdir(args.split_dir)
 
 settings.update({'split_dir': args.split_dir})
-
 
 with open(args.results_dir + '/experiment_{}.txt'.format(args.exp_code), 'w') as f:
     print(settings, file=f)
