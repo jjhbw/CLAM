@@ -211,7 +211,6 @@ class WholeSlideImage(object):
 
     def createPatches_bag_hdf5(self, save_path, patch_level=0, patch_size=256, step_size=256, save_coord=True, **kwargs):
         contours = self.contours_tissue
-        contour_holes = self.holes_tissue
 
         print("Creating patches for: ", self.name, "...",)
         elapsed = time.time()
